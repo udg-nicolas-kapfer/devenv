@@ -7,13 +7,13 @@ Move-Item -Force -Path .\*.pem -Destination .\conf/
 
 # register domain resolution using a local NRTP rule configuration
 # see https://docs.microsoft.com/en-us/powershell/module/dnsclient/add-dnsclientnrptrule?view=win10-ps#examples
-Add-DnsClientNrptRule -Namespace "dev.env" -NameServers "127.0.0.1"
+Add-DnsClientNrptRule -Namespace "dev.env" -NameServers "127.0.0.1" -DisplayName "DevEnv-DNSResolve"
 
 # set custom environment variables
 Set-Content -Path .\.env -Value "DEVENV_WEB_PATH=$env:UserProfile/www"
 
 # create shared docker network
-docker network create devenv
+docker.exe network create devenv
 
 # run the application
-docker-compose up -d
+docker-compose.exe up -d
